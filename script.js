@@ -134,7 +134,7 @@ const PRODI_LIST = [
   ["Kedokteran", "FK", "r1", "kesehatan"],
   ["Kedokteran Gigi", "FK", "r1", "kesehatan"],
   ["Keperawatan", "FK", "r1", "kesehatan"],
-  // ---------- FKP : Fakultas Kelautan dan Perikanan ----------
+  // ---------- FKP : Fakultas Ketahanan Pangan ----------
   ["Agribisnis Digital", "FKP", "r3", "agro it"],
   ["Akuakultur", "FKP", "r3", "agro"],
   ["Biosains Hewan", "FKP", "r1", "sains"],
