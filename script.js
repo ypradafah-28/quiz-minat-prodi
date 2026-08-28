@@ -69,6 +69,7 @@ const SOAL_BANK = [
   { id: 8,  teks: "Apakah kamu menikmati kegiatan menggambar, membuat animasi/film, atau merancang karya desain visual?", rumpun: "r3", tags: "seni desain film" },
   { id: 9,  teks: "Apakah kamu berminat mengajar, mendampingi tumbuh kembang anak, atau memahami psikologi manusia?", rumpun: "r2", tags: "pendidikan psikologi" },
   { id: 10, teks: "Apakah kamu menyukai aktivitas fisik, dunia keolahragaan, atau pengorganisasian industri pariwisata?", rumpun: "r1", tags: "olahraga pariwisata" },
+  { id: 11, teks: "Apakah kamu tertarik memahami perilaku, emosi, dan proses mental manusia untuk membantu menyelesaikan masalah psikologis serta pengembangan diri?", rumpun: "r2", tags: "psikologi" },
 ];
 
 /* ============ 4. DAFTAR PRODI (104) ============ */
