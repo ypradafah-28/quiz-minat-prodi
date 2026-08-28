@@ -1,0 +1,255 @@
+/* ============================================================
+   QUIZ MINAT PRODI — style.css
+   Tema : biru & putih modern + animasi
+   Catatan : layout dasar memakai Tailwind (di index.html).
+   File ini berisi animasi & gaya kustom.
+   ============================================================ */
+
+/* ---------- 1. Variabel tema (biru) ---------- */
+:root {
+  --biru-700: #1d4ed8;
+  --biru-600: #2563eb;
+  --biru-500: #3b82f6;
+  --biru-400: #60a5fa;
+  --biru-100: #dbeafe;
+  --biru-050: #eff6ff;
+  --indigo-500: #6366f1;
+  --teks-gelap: #1e3a8a;
+  --teks-badan: #334155;
+}
+
+/* ---------- 2. Dasar halaman ---------- */
+* { box-sizing: border-box; }
+html, body { min-height: 100%; }
+body {
+  margin: 0;
+  font-family: 'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif;
+  background: linear-gradient(160deg, var(--biru-050) 0%, #dbeafe 50%, #e0f2fe 100%);
+  color: var(--teks-badan);
+  overflow-x: hidden;
+}
+
+/* ---------- 3. Latar dekorasi (blob biru melayang) ---------- */
+.bg-decoration { position: fixed; inset: 0; z-index: 0; overflow: hidden; pointer-events: none; }
+.blob {
+  position: absolute; border-radius: 9999px; filter: blur(70px);
+  opacity: .45; animation: blob-float 14s ease-in-out infinite;
+}
+.blob-1 { width: 420px; height: 420px; top: -120px; left: -100px;
+  background: radial-gradient(circle, #60a5fa 0%, transparent 70%); }
+.blob-2 { width: 380px; height: 380px; bottom: -120px; right: -90px;
+  background: radial-gradient(circle, #93c5fd 0%, transparent 70%); animation-delay: -5s; }
+.blob-3 { width: 280px; height: 280px; top: 45%; left: 55%;
+  background: radial-gradient(circle, #a5b4fc 0%, transparent 70%); animation-delay: -9s; }
+@keyframes blob-float {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50%      { transform: translate(30px, -30px) scale(1.08); }
+}
+
+/* Kanvas animasi petasan: menutupi layar, klik tetap menembus */
+#canvas-petasan {
+  position: fixed; inset: 0; z-index: 40;
+  pointer-events: none;
+}
+
+/* ---------- 4. Kartu utama (1 layar pusat) ---------- */
+.card-main {
+  background: rgba(255, 255, 255, .92);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(59, 130, 246, .15);
+  border-radius: 28px;
+  box-shadow: 0 20px 50px -20px rgba(29, 78, 216, .35);
+  padding: 2rem 1.75rem;
+}
+@media (min-width: 640px) { .card-main { padding: 3rem 2.75rem; } }
+
+/* ---------- 5. Section & animasi masuk ---------- */
+.quiz-section { position: relative; }
+.hidden { display: none !important; }
+.anim-masuk { animation: fadeSlideIn .5s cubic-bezier(.22, 1, .36, 1) both; }
+@keyframes fadeSlideIn {
+  from { opacity: 0; transform: translateY(18px) scale(.985); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* ---------- 6. Layar Beranda ---------- */
+.badge-logo {
+  width: 84px; height: 84px; display: flex; align-items: center; justify-content: center;
+  font-size: 2.4rem; border-radius: 26px;
+  background: linear-gradient(135deg, var(--biru-500), var(--indigo-500));
+  box-shadow: 0 14px 30px -8px rgba(37, 99, 235, .55);
+  animation: pop-in .6s cubic-bezier(.22, 1, .36, 1) both;
+}
+@keyframes pop-in {
+  from { transform: scale(.5); opacity: 0; }
+  70%  { transform: scale(1.08); }
+  to   { transform: scale(1); opacity: 1; }
+}
+.title-main {
+  margin-top: 1.25rem; margin-bottom: .5rem;
+  font-size: clamp(1.7rem, 5vw, 2.4rem); font-weight: 800;
+  background: linear-gradient(135deg, var(--biru-700), var(--indigo-500));
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+}
+.subtitle {
+  margin: 0 auto; max-width: 34rem; color: #475569; font-size: .95rem; line-height: 1.6;
+}
+.rumpun-chips { display: flex; flex-wrap: wrap; justify-content: center; gap: .5rem; margin: 1.5rem 0; }
+.chip {
+  display: inline-flex; align-items: center; gap: .35rem;
+  padding: .4rem .9rem; border-radius: 999px; font-size: .78rem; font-weight: 600;
+  border: 1px solid transparent;
+}
+.chip-r1 { background: #eff6ff; color: #1d4ed8; border-color: #bfdbfe; }
+.chip-r2 { background: #f0f9ff; color: #0369a1; border-color: #bae6fd; }
+.chip-r3 { background: #eef2ff; color: #4338ca; border-color: #c7d2fe; }
+
+/* ---------- 7. Tombol utama (dengan efek kilau) ---------- */
+.btn-primary {
+  position: relative; overflow: hidden; cursor: pointer; border: 0;
+  display: inline-block; padding: .85rem 2.4rem; border-radius: 999px;
+  font-size: 1rem; font-weight: 700; color: #fff;
+  background: linear-gradient(135deg, var(--biru-600), var(--indigo-500));
+  box-shadow: 0 12px 26px -8px rgba(37, 99, 235, .6);
+  transition: transform .2s ease, box-shadow .2s ease;
+}
+.btn-primary:hover { transform: translateY(-3px) scale(1.02); box-shadow: 0 18px 34px -8px rgba(37, 99, 235, .7); }
+.btn-primary:active { transform: translateY(0) scale(.97); }
+.btn-primary::after { /* kilau yang berjalan */
+  content: ""; position: absolute; top: 0; left: -80%;
+  width: 50%; height: 100%; transform: skewX(-20deg);
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, .35), transparent);
+  animation: shimmer 3.2s ease-in-out infinite;
+}
+@keyframes shimmer {
+  0% { left: -80%; }
+  60%, 100% { left: 130%; }
+}
+
+/* ---------- 8. Layar Kuis ---------- */
+.quiz-top { display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem; }
+/* Tombol "Kembali" ke layar mulai kuis */
+.btn-kembali {
+  flex-shrink: 0; cursor: pointer;
+  display: inline-flex; align-items: center; gap: .3rem;
+  padding: .45rem .85rem; border-radius: 999px;
+  border: 1.5px solid #dbeafe; background: #eff6ff;
+  color: #1d4ed8; font-size: .78rem; font-weight: 700;
+  transition: transform .18s ease, background .18s ease, border-color .18s ease;
+}
+.btn-kembali:hover { background: #dbeafe; border-color: #93c5fd; transform: translateX(-2px); }
+.btn-kembali:active { transform: scale(.95); }
+.progress-text { font-size: .82rem; font-weight: 700; color: var(--biru-700); white-space: nowrap; }
+.progress-track {
+  flex: 1; height: 10px; border-radius: 999px;
+  background: #e2e8f0; overflow: hidden;
+}
+.progress-fill {
+  height: 100%; width: 0%; border-radius: 999px;
+  background: linear-gradient(90deg, var(--biru-500), var(--indigo-500));
+  transition: width .5s cubic-bezier(.22, 1, .36, 1);
+}
+.soal-text {
+  margin: 0 0 1.5rem; font-size: clamp(1.1rem, 3.4vw, 1.45rem);
+  font-weight: 800; line-height: 1.45; color: var(--teks-gelap);
+  min-height: 4.4em; /* tinggi tetap agar layout tidak melompat */
+}
+.soal-options { display: grid; gap: .7rem; }
+
+/* Tombol opsi jawaban */
+.option-btn {
+  display: flex; align-items: center; gap: .9rem; width: 100%;
+  padding: .95rem 1.2rem; cursor: pointer; text-align: left;
+  border-radius: 16px; border: 2px solid #e2e8f0; background: #fff;
+  transition: transform .18s ease, border-color .18s ease, box-shadow .18s ease, background .18s ease;
+}
+.option-btn:hover {
+  transform: translateX(6px); border-color: var(--biru-400);
+  box-shadow: 0 8px 20px -10px rgba(37, 99, 235, .4);
+}
+.option-btn:active { transform: scale(.98); }
+.option-emoji {
+  font-size: 1.35rem; width: 2.1rem; height: 2.1rem;
+  display: flex; align-items: center; justify-content: center;
+  border-radius: 12px; background: var(--biru-050); transition: background .18s ease;
+}
+.option-label { font-weight: 600; color: var(--teks-badan); font-size: .95rem; }
+.option-selected { border-color: var(--biru-600); background: var(--biru-050); box-shadow: 0 10px 24px -10px rgba(37, 99, 235, .55); }
+.option-selected .option-emoji { background: var(--biru-600); }
+.option-dim { opacity: .45; }
+
+/* ---------- 9. Layar Analisis ---------- */
+.spinner {
+  width: 62px; height: 62px; margin: 1rem auto 1.4rem; border-radius: 50%;
+  border: 6px solid var(--biru-100); border-top-color: var(--biru-600);
+  animation: spin 1s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+.title-sub { margin: .4rem 0 .3rem; font-size: 1.35rem; font-weight: 800; color: var(--teks-gelap); }
+.dot-anim span { opacity: .15; animation: blink 1.2s infinite; }
+.dot-anim span:nth-child(2) { animation-delay: .25s; }
+.dot-anim span:nth-child(3) { animation-delay: .5s; }
+@keyframes blink {
+  0%, 100% { opacity: .15; }
+  50%      { opacity: 1; }
+}
+
+/* ---------- 10. Layar Hasil (Top 5 Prodi) ---------- */
+.title-main-2 {
+  font-size: clamp(1.4rem, 4.5vw, 1.9rem); font-weight: 800; color: var(--teks-gelap);
+  margin: 0 0 .25rem;
+}
+.result-card {
+  display: flex; align-items: center; gap: 1rem;
+  padding: .95rem 1.1rem; border-radius: 18px;
+  background: #fff; border: 1.5px solid #e2e8f0;
+  box-shadow: 0 8px 22px -14px rgba(29, 78, 216, .25);
+  transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+}
+.result-card:hover {
+  transform: translateY(-3px); border-color: var(--biru-400);
+  box-shadow: 0 14px 28px -12px rgba(37, 99, 235, .4);
+}
+.rank-badge {
+  flex-shrink: 0; width: 46px; height: 46px;
+  display: flex; align-items: center; justify-content: center;
+  border-radius: 14px; font-weight: 800; font-size: 1.05rem; color: #fff;
+}
+.rank-1 { background: linear-gradient(135deg, #1d4ed8, #6366f1); box-shadow: 0 8px 18px -6px rgba(29, 78, 216, .6); }
+.rank-2 { background: linear-gradient(135deg, #0ea5e9, #3b82f6); box-shadow: 0 8px 18px -6px rgba(14, 165, 233, .6); }
+.rank-3 { background: linear-gradient(135deg, #6366f1, #8b5cf6); box-shadow: 0 8px 18px -6px rgba(99, 102, 241, .6); }
+.rank-4, .rank-5 { background: linear-gradient(135deg, #60a5fa, #93c5fd); }
+.result-info { flex: 1; min-width: 0; }
+.result-nama { margin: 0 0 .3rem; font-weight: 700; color: var(--teks-gelap); font-size: .98rem; line-height: 1.35; }
+.rumpun-badge {
+  display: inline-flex; align-items: center; gap: .25rem;
+  font-size: .7rem; font-weight: 700; padding: .22rem .6rem; border-radius: 999px; border: 1px solid transparent;
+}
+.badge-r1 { background: #eff6ff; color: #1d4ed8; border-color: #bfdbfe; }
+.badge-r2 { background: #f0f9ff; color: #0369a1; border-color: #bae6fd; }
+.badge-r3 { background: #eef2ff; color: #4338ca; border-color: #c7d2fe; }
+.result-pct { flex-shrink: 0; text-align: right; width: 78px; }
+.pct-angka { font-weight: 800; font-size: 1.05rem; color: var(--biru-700); }
+.pct-track { margin-top: .3rem; height: 6px; border-radius: 999px; background: #e2e8f0; overflow: hidden; }
+.pct-fill {
+  height: 100%; border-radius: 999px;
+  background: linear-gradient(90deg, var(--biru-500), var(--indigo-500));
+  transition: width .8s ease;
+}
+
+/* ---------- 11. Scrollbar & responsif ---------- */
+::-webkit-scrollbar { width: 10px; }
+::-webkit-scrollbar-track { background: var(--biru-050); }
+::-webkit-scrollbar-thumb { background: var(--biru-400); border-radius: 999px; }
+
+@media (max-width: 480px) {
+  .card-main { padding: 1.6rem 1.2rem; border-radius: 22px; }
+  .result-card { flex-wrap: wrap; }
+  .result-pct {
+    width: 100%; text-align: left; display: flex; align-items: center; gap: .6rem;
+  }
+  .pct-track { flex: 1; margin-top: 0; }
+}
+
+
